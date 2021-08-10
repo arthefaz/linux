@@ -6,3 +6,4 @@ dtb-$(CONFIG_ARCH_EXYNOS) += \
 	exynos7885-jackpotlte.dtb	\
 	exynos850-e850-96.dtb		\
 	exynosautov9-sadk.dtb
+	exynos7420-zeroflte.dtb 	\
