@@ -1,0 +1,96 @@
+// SPDX-License-Identifier: GPL-2.0
+
+/dts-v1/;
+#include <dt-bindings/clock/samsung,s2mps11.h>
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include "exynos7420.dtsi"
+
+/ {
+	aliases {
+		serial0 = &serial_1;
+	};
+
+	chosen {
+		bootargs = "earlycon=exynos4210,0x14c20000 console=ttySAC1,115200n8 root=/dev/sda15 rw ignore_loglevel";
+		stdout-path = &serial_1;
+	};
+
+	memory@40000000 {
+		device_type = "memory";
+		reg = <0x0 0x40000000 0x0 0xC0000000>;
+	};
+
+	gpio-keys {
+		compatible = "gpio-keys";
+
+		power-key {
+			gpios = <&gpa2 2 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_POWER>;
+			label = "power key";
+			debounce-interval = <10>;
+		};
+
+		volume-up-key {
+			gpios = <&gpa0 2 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_VOLUMEUP>;
+			label = "volume-up key";
+			debounce-interval = <10>;
+		};
+
+		volume-down-key {
+			gpios = <&gpa0 3 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_VOLUMEDOWN>;
+			label = "volume-down key";
+			debounce-interval = <10>;
+		};
+
+		homepage-key {
+			gpios = <&gpa0 5 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_MENU>;
+			label = "homepage key";
+			debounce-interval = <10>;
+		};
+	};
+
+	ufs_fixed_vcc: fixedregulator@0 {
+		compatible = "regulator-fixed";
+		regulator-name = "VDD_UFS_2P95";
+		gpio = <&gph1 4 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+
+	ufs_fixed_vccq2: fixedregulator@2 {
+		compatible = "regulator-fixed";
+		regulator-name = "VDD_UFS_1P8";
+		gpio = <&gph1 4 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+		startup-delay-us = <2000>;
+		endup-delay-us = <2000>;
+		regulator-boot-on;
+		regulator-always-on;
+	};
+};
+
+
+&rtc {
+	status = "okay";
+	clocks = <&clock_ccore PCLK_RTC>, <&s2mps13_osc S2MPS11_CLK_AP>;
+	clock-names = "rtc", "rtc_src";
+};
+
+&serial_1 {
+	status = "okay";
+};
+
+&timer {
+	arm,cpu-registers-not-fw-configured;
+	clock-frequency = <24000000>;
+};
+
+&ufs {
+	status = "okay";
+};

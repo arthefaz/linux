@@ -7,3 +7,4 @@ dtb-$(CONFIG_ARCH_EXYNOS) += \
 	exynos850-e850-96.dtb		\
 	exynosautov9-sadk.dtb
 	exynos7420-zeroflte.dtb 	\
+	exynos7420-noblelte.dtb
