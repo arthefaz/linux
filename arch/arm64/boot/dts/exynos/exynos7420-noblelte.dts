@@ -16,6 +16,7 @@
 			width = <1440>;
 			height = <2560>;
 			stride = <5760>;
+			format = "a8r8g8b8";
 		};
 	};
 
