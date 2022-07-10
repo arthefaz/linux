@@ -9,7 +9,7 @@
         	#address-cells = <2>;
         	#size-cells = <2>;
         	ranges;
-
+		
                 framebuffer0: framebuffer@e2a00000 {
 			compatible = "simple-framebuffer";
 			reg = <0 0xe2a00000 0 (1440 * 2560 * 4)>;

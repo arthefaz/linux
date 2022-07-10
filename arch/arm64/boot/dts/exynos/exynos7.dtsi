@@ -6,6 +6,7 @@
  *		http://www.samsung.com
  */
 
+/memreserve/ 0xFE800000 0x1800000;      /* EL3 monitor, secure intepreter */
 #include <dt-bindings/clock/exynos7-clk.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 
@@ -118,6 +119,7 @@
 		method = "smc";
 		cpu_off = <0x84000002>;
 		cpu_on = <0xC4000003>;
+		cpu_suspend = <0xC4000001>;
 	};
 
 	soc: soc@0 {
@@ -583,9 +585,19 @@
 				     <GIC_SPI 242 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 240 IRQ_TYPE_LEVEL_HIGH>;
 			interrupt-names = "job", "mmu", "gpu";
+			clocks = <&fin_pll>;
+                        clock-names = "fin_pll";
+			power-domains = <&pd_g3d>;
 			status = "disabled";
 			/* TODO: operating points for DVFS, cooling device */
 		};
+
+		pd_g3d: power-domain@105c4100 {   
+                        compatible = "samsung,exynos5433-pd";
+                        reg = <0x105c4060 0x20>;
+                        #power-domain-cells = <0>;   
+                        label = "G3D";
+                };
 
 		mmc_0: mmc@15740000 {
 			compatible = "samsung,exynos7-dw-mshc-smu";

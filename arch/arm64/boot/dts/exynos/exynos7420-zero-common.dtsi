@@ -13,8 +13,10 @@
 	};
 
 	chosen {
-		bootargs = "earlycon=exynos4210,0x14c20000 rw irqpoll ignore_loglevel clk_ignore_unused pd_ignore_unused PMOS_NO_OUTPUT_REDIRECT";
+		bootargs = "earlycon=exynos4210,0x14c20000 rw ignore_loglevel clk_ignore_unused irqpoll pd_ignore_unused PMOS_NO_OUTPUT_REDIRECT";
 		stdout-path = &serial_1;
+		linux,initrd-start = <0x43000000>;
+                linux,initrd-end = <0x43FFFFFF>;
 	};
 
 	memory@40000000 {
@@ -174,6 +176,7 @@
 				regulator-max-microvolt = <3300000>;
 				regulator-ramp-delay = <12000>;
 				regulator-boot-on;
+				regulator-always-on;
 			};
 
 			ldo4_reg: LDO4 {
@@ -184,7 +187,7 @@
 			};
 
 			ldo6_reg: LDO6 {
-                                regulator-name = "VDD3P3_USB";
+                                regulator-name = "VDD_USB_3P0";
                                 regulator-min-microvolt = <2250000>;
                                 regulator-max-microvolt = <3300000>;
                                 regulator-always-on;
@@ -207,6 +210,7 @@
 				regulator-name = "VCC_1P8_CODEC_PMIC";
 				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <1800000>;
+				regulator-always-on;
 			};
 
 			ldo17_reg: LDO17 {
@@ -231,6 +235,7 @@
 				regulator-name = "VDD20_1P8_AP";
 				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <1800000>;
+				regulator-always-on;
 			};
 
 			ldo21_reg: LDO21 {
@@ -367,7 +372,7 @@
 };
 
 &ufs {
-	status = "disabled";
+	status = "okay";
 
 	vcc-supply = <&ufs_fixed_vcc>;
 	vccq-supply = <&buck10_reg>;
@@ -376,7 +381,7 @@
 
 &gpu {
         status = "okay";
-	mali-supply = <&buck6_reg>
+	mali-supply = <&buck6_reg>;
 };
 
 &pinctrl_bus1 {
@@ -384,14 +389,14 @@
 		samsung,pins = "gph1-1";
 		samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
 		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-		samsung,pin-drv = <EXYNOS7_PIN_DRV_LV1>;
+		samsung,pin-drv = <EXYNOS4_PIN_DRV_LV1>;
 	};
 
 	usb3drd_boost_en: usb3drd-boost-en-pins {
 		samsung,pins = "gpf4-1";
 		samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
 		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-		samsung,pin-drv = <EXYNOS7_PIN_DRV_LV1>;
+		samsung,pin-drv = <EXYNOS4_PIN_DRV_LV1>;
 	};
 };
 

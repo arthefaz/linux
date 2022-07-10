@@ -26,11 +26,51 @@
 };
 
 &cpus {
+
+	cpu-map {
+			cluster0 {
+				core0 {
+					cpu = <&cpu_atlas0>;
+				};
+				core1 {
+					cpu = <&cpu_atlas1>;
+				};
+				core2 {
+					cpu = <&cpu_atlas2>;
+				};
+				core3 {
+					cpu = <&cpu_atlas3>;
+				};
+			};
+
+			cluster1 {
+				core0 {
+					cpu = <&cpu_apollo0>;
+				};
+				core1 {
+					cpu = <&cpu_apollo1>;
+				};
+				core2 {
+					cpu = <&cpu_apollo2>;
+				};
+				core3 {
+					cpu = <&cpu_apollo3>;
+				};
+			};
+		};
+
     cpu_apollo0: cpu@100 {
         device_type = "cpu";
         compatible = "arm,cortex-a53";
         reg = <0x100>;
         enable-method = "psci";
+	i-cache-size = <0x8000>;
+        i-cache-line-size = <64>;
+        i-cache-sets = <256>;
+        d-cache-size = <0x8000>;
+        d-cache-line-size = <64>;
+        d-cache-sets = <256>;
+        next-level-cache = <&apollo_l2>;
     };
 
     cpu_apollo1: cpu@101 {
@@ -38,6 +78,13 @@
         compatible = "arm,cortex-a53";
         reg = <0x101>;
         enable-method = "psci";
+        i-cache-size = <0x8000>;
+        i-cache-line-size = <64>;
+        i-cache-sets = <256>;
+        d-cache-size = <0x8000>;
+        d-cache-line-size = <64>;
+        d-cache-sets = <256>;
+        next-level-cache = <&apollo_l2>;
     };
 
     cpu_apollo2: cpu@102 {
@@ -45,6 +92,13 @@
         compatible = "arm,cortex-a53";
         reg = <0x102>;
         enable-method = "psci";
+	i-cache-size = <0x8000>;
+        i-cache-line-size = <64>;
+        i-cache-sets = <256>;
+        d-cache-size = <0x8000>;
+        d-cache-line-size = <64>;
+        d-cache-sets = <256>; 
+        next-level-cache = <&apollo_l2>;
     };
 
     cpu_apollo3: cpu@103 {
@@ -52,5 +106,20 @@
         compatible = "arm,cortex-a53";
         reg = <0x103>;
         enable-method = "psci";
+	i-cache-size = <0x8000>;
+        i-cache-line-size = <64>;
+        i-cache-sets = <256>;
+        d-cache-size = <0x8000>;
+        d-cache-line-size = <64>;
+        d-cache-sets = <256>; 
+        next-level-cache = <&apollo_l2>;
     };
+
+	apollo_l2: l2-cache1 {
+			compatible = "cache";
+			cache-size = <0x40000>;
+			cache-line-size = <64>;
+			cache-sets = <256>;
+		};
+
 };
