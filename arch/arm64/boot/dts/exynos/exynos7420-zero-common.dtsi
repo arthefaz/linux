@@ -372,11 +372,11 @@
 };
 
 &ufs {
-	status = "okay";
+	status = "disabled";
 
-	vcc-supply = <&ufs_fixed_vcc>;
-	vccq-supply = <&buck10_reg>;
-	vccq2-supply = <&ufs_fixed_vccq2>;
+	//vcc-supply = <&ufs_fixed_vcc>;
+	//vccq-supply = <&buck10_reg>;
+	//vccq2-supply = <&ufs_fixed_vccq2>;
 };
 
 &gpu {
