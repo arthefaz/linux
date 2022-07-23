@@ -13,10 +13,10 @@
 	};
 
 	chosen {
-		bootargs = "earlycon=exynos4210,0x14c20000 rw ignore_loglevel clk_ignore_unused irqpoll pd_ignore_unused PMOS_NO_OUTPUT_REDIRECT";
+		bootargs = "earlycon=exynos4210,0x14c20000 keep_bootcon rw ignore_loglevel clk_ignore_unused irqpoll pd_ignore_unused PMOS_NO_OUTPUT_REDIRECT";
 		stdout-path = &serial_1;
-		linux,initrd-start = <0x43000000>;
-                linux,initrd-end = <0x43FFFFFF>;
+		//linux,initrd-start = <0x43000000>;
+                //linux,initrd-end = <0x43FFFFFF>;
 	};
 
 	memory@40000000 {
@@ -76,7 +76,7 @@
 		regulator-always-on;
 	};
 
-	usb30_vbus_reg: regulator-usb30 {
+/*	usb30_vbus_reg: regulator-usb30 {
 		compatible = "regulator-fixed";
 		regulator-name = "VBUS_5V";
 		regulator-min-microvolt = <5000000>;
@@ -96,7 +96,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&usb3drd_boost_en>;
 		enable-active-high;
-	};
+	}; */
 };
 
 &cpu_apollo0 {
@@ -385,19 +385,19 @@
 };
 
 &pinctrl_bus1 {
-	usb30_vbus_en: usb30-vbus-en-pins {
-		samsung,pins = "gph1-1";
-		samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
-		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-		samsung,pin-drv = <EXYNOS4_PIN_DRV_LV1>;
-	};
+	//usb30_vbus_en: usb30-vbus-en-pins {
+	//	samsung,pins = "gph1-1";
+	//	samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
+	//	samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
+	//	samsung,pin-drv = <EXYNOS4_PIN_DRV_LV1>;
+	//};
 
-	usb3drd_boost_en: usb3drd-boost-en-pins {
-		samsung,pins = "gpf4-1";
-		samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
-		samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
-		samsung,pin-drv = <EXYNOS4_PIN_DRV_LV1>;
-	};
+	//usb3drd_boost_en: usb3drd-boost-en-pins {
+	//	samsung,pins = "gpf4-1";
+	//	samsung,pin-function = <EXYNOS_PIN_FUNC_OUTPUT>;
+	//	samsung,pin-pud = <EXYNOS_PIN_PULL_NONE>;
+	//	samsung,pin-drv = <EXYNOS4_PIN_DRV_LV1>;
+	//};
 };
 
 &usbdrd {
@@ -406,6 +406,6 @@
 };
 
 &usbdrd_phy {
-	vbus-supply = <&usb30_vbus_reg>;
-	vbus-boost-supply = <&usb3drd_boost_5v>;
+	//vbus-supply = <&usb30_vbus_reg>;
+	//vbus-boost-supply = <&usb3drd_boost_5v>;
 };
